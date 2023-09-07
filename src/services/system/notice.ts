@@ -2,7 +2,7 @@ import { request } from '@umijs/max';
 
 // 查询通知公告列表
 export async function getNoticeList(params?: API.System.NoticeListParams) {
-  return request<API.System.NoticePageResult>('/api/system/notice/list', {
+  return request<API.System.NoticePageResult>('/system/notice/list', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json;charset=UTF-8',
@@ -13,14 +13,14 @@ export async function getNoticeList(params?: API.System.NoticeListParams) {
 
 // 查询通知公告详细
 export function getNotice(noticeId: number) {
-  return request<API.System.NoticeInfoResult>(`/api/system/notice/${noticeId}`, {
+  return request<API.System.NoticeInfoResult>(`/system/notice/${noticeId}`, {
     method: 'GET'
   });
 }
 
 // 新增通知公告
 export async function addNotice(params: API.System.Notice) {
-  return request<API.Result>('/api/system/notice', {
+  return request<API.Result>('/system/notice', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=UTF-8',
@@ -31,7 +31,7 @@ export async function addNotice(params: API.System.Notice) {
 
 // 修改通知公告
 export async function updateNotice(params: API.System.Notice) {
-  return request<API.Result>('/api/system/notice', {
+  return request<API.Result>('/system/notice', {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json;charset=UTF-8',
@@ -42,14 +42,14 @@ export async function updateNotice(params: API.System.Notice) {
 
 // 删除通知公告
 export async function removeNotice(ids: string) {
-  return request<API.Result>(`/api/system/notice/${ids}`, {
+  return request<API.Result>(`/system/notice/${ids}`, {
     method: 'DELETE'
   });
 }
 
 // 导出通知公告
 export function exportNotice(params?: API.System.NoticeListParams) { 
-  return request<API.Result>(`/api/system/notice/export`, {
+  return request<API.Result>(`/system/notice/export`, {
     method: 'GET',
     params
   });

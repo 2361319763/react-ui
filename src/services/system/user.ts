@@ -4,7 +4,7 @@ import { DataNode } from 'antd/es/tree';
 
 // 查询用户信息列表
 export async function getUserList(params?: API.System.UserListParams, options?: { [key: string]: any }) {
-  return request<API.System.UserPageResult>('/api/system/user/list', {
+  return request<API.System.UserPageResult>('/system/user/list', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json;charset=UTF-8',
@@ -16,7 +16,7 @@ export async function getUserList(params?: API.System.UserListParams, options?: 
 
 // 查询用户信息详细
 export function getUser(userId: number, options?: { [key: string]: any }) {
-  return request<API.System.UserInfoResult>(`/api/system/user/${userId}`, {
+  return request<API.System.UserInfoResult>(`/system/user/${userId}`, {
     method: 'GET',
     ...(options || {})
   });
@@ -24,7 +24,7 @@ export function getUser(userId: number, options?: { [key: string]: any }) {
 
 // 新增用户信息
 export async function addUser(params: API.System.User, options?: { [key: string]: any }) {
-  return request<API.Result>('/api/system/user', {
+  return request<API.Result>('/system/user', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=UTF-8',
@@ -36,7 +36,7 @@ export async function addUser(params: API.System.User, options?: { [key: string]
 
 // 修改用户信息
 export async function updateUser(params: API.System.User, options?: { [key: string]: any }) {
-  return request<API.Result>('/api/system/user', {
+  return request<API.Result>('/system/user', {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json;charset=UTF-8',
@@ -48,7 +48,7 @@ export async function updateUser(params: API.System.User, options?: { [key: stri
 
 // 删除用户信息
 export async function removeUser(ids: string, options?: { [key: string]: any }) {
-  return request<API.Result>(`/api/system/user/${ids}`, {
+  return request<API.Result>(`/system/user/${ids}`, {
     method: 'DELETE',
     ...(options || {})
   });
@@ -56,7 +56,7 @@ export async function removeUser(ids: string, options?: { [key: string]: any }) 
 
 // 导出用户信息
 export function exportUser(params?: API.System.UserListParams, options?: { [key: string]: any }) {
-  return request<API.Result>(`/api/system/user/export`, {
+  return request<API.Result>(`/system/user/export`, {
     method: 'GET',
     params,
     ...(options || {})
@@ -69,7 +69,7 @@ export function changeUserStatus(userId: number, status: string) {
     userId,
     status
   }
-  return request<API.Result>('/api/system/user/changeStatus', {
+  return request<API.Result>('/system/user/changeStatus', {
     method: 'put',
     data: data
   })
@@ -77,13 +77,13 @@ export function changeUserStatus(userId: number, status: string) {
 
 // 查询用户个人信息
 export function getUserProfile() {
-  return request('/api/system/user/profile', {
+  return request('/system/user/profile', {
     method: 'get'
   })
 }
 
 export function updateUserProfile(data: API.CurrentUser) {
-  return request<API.Result>('/api/system/user/profile', {
+  return request<API.Result>('/system/user/profile', {
     method: 'put',
     data: data
   })
@@ -95,7 +95,7 @@ export function resetUserPwd(userId: number, password: string) {
     userId,
     password
   }
-  return request<API.Result>('/api/system/user/resetPwd', {
+  return request<API.Result>('/system/user/resetPwd', {
     method: 'put',
     data: data
   })
@@ -107,7 +107,7 @@ export function updateUserPwd(oldPassword: string, newPassword: string) {
     oldPassword,
     newPassword
   }
-  return request<API.Result>('/api/system/user/profile/updatePwd', {
+  return request<API.Result>('/system/user/profile/updatePwd', {
     method: 'put',
     params: data
   })
@@ -115,7 +115,7 @@ export function updateUserPwd(oldPassword: string, newPassword: string) {
 
 // 用户头像上传
 export function uploadAvatar(data: any) {
-  return request('/api/system/user/profile/avatar', {
+  return request('/system/user/profile/avatar', {
     method: 'post',
     data: data
   })
@@ -140,7 +140,7 @@ export function updateAuthRole(data: Record<string, any>) {
 // 获取数据列表
 export function getDeptTree(params: any): Promise<DataNode[]> {
   return new Promise((resolve) => {
-    request(`/api/system/user/deptTree`, {
+    request(`/system/user/deptTree`, {
       method: 'get',
       params,
     }).then((res: any) => {

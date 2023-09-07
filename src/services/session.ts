@@ -81,9 +81,9 @@ export function patchRouteWithRemoteMenus(routes: any) {
   patchRouteItems(proLayout, remoteMenu, '');
 }
 
-/** 获取当前的用户 GET /api/getUserInfo */
+/** 获取当前的用户 GET /getUserInfo */
 export async function getUserInfo(options?: Record<string, any>) {
-  return request<API.UserInfoResult>('/prod-api/getInfo', {
+  return request<API.UserInfoResult>('/getInfo', {
     method: 'GET',
     ...(options || {}),
   });
@@ -91,13 +91,13 @@ export async function getUserInfo(options?: Record<string, any>) {
 
 // 刷新方法
 export async function refreshToken() {
-  return request('/prod-api/refresh', {
+  return request('/refresh', {
     method: 'post'
   })
 }
 
 export async function getRouters(): Promise<any> {
-  return request('/prod-api/getRouters');
+  return request('/getRouters');
 }
 
 export function convertCompatRouters(childrens: API.RoutersMenuItem[]): any[] {

@@ -1,7 +1,7 @@
 import { request } from '@umijs/max';
 
 export async function getCaptchaImg(params?: Record<string, any>, options?: Record<string, any>) {
-  return request('/prod-api/captchaImage', {
+  return request('/captchaImage', {
     method: 'GET',
     params: {
       ...params,
@@ -13,9 +13,9 @@ export async function getCaptchaImg(params?: Record<string, any>, options?: Reco
   });
 }
 
-/** 登录接口 POST /api/login/account */
+/** 登录接口 POST /login/account */
 export async function login(body: API.LoginParams, options?: Record<string, any>) {
-  return request<API.LoginResult>('/prod-api/login', {
+  return request<API.LoginResult>('/login', {
     method: 'POST',
     headers: {
       isToken: false,
@@ -26,14 +26,14 @@ export async function login(body: API.LoginParams, options?: Record<string, any>
   });
 }
 
-/** 退出登录接口 POST /api/login/outLogin */
+/** 退出登录接口 POST /login/outLogin */
 export async function logout() {
-  return request<Record<string, any>>('/prod-api/logout', {
+  return request<Record<string, any>>('/logout', {
     method: 'delete',
   });
 }
 
 // 获取手机验证码
 export async function getMobileCaptcha(mobile: string) {
-  return request(`/api/login/captcha?mobile=${mobile}`);
+  return request(`/login/captcha?mobile=${mobile}`);
 }

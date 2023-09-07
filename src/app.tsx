@@ -194,8 +194,11 @@ export const request = {
   ...errorConfig,
   requestInterceptors: [
     (url: any, options: { headers: any }) => {
+      const baseApi = '/dev-api';
       const headers = options.headers ? options.headers : [];
+
       console.log('request ====>:', url);
+      
       const authHeader = headers['Authorization'];
       const isToken = headers['isToken'];
       if (!authHeader && isToken !== false) {
@@ -217,7 +220,10 @@ export const request = {
           clearSessionToken();
         }
       }
-      return { url, options };
+      return { 
+        url: baseApi + url,
+        options
+      };
     },
   ],
   responseInterceptors: [

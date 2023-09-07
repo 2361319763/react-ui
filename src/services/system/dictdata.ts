@@ -5,7 +5,7 @@ export async function getDictDataList(
   params?: API.System.DictDataListParams,
   options?: { [key: string]: any },
 ) {
-  return request<API.System.DictDataPageResult>('/api/system/dict/data/list', {
+  return request<API.System.DictDataPageResult>('/system/dict/data/list', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json;charset=UTF-8',
@@ -17,7 +17,7 @@ export async function getDictDataList(
 
 // 查询字典数据详细
 export function getDictData(dictCode: number, options?: { [key: string]: any }) {
-  return request<API.System.DictDataInfoResult>(`/api/system/dict/data/${dictCode}`, {
+  return request<API.System.DictDataInfoResult>(`/system/dict/data/${dictCode}`, {
     method: 'GET',
     ...(options || {}),
   });
@@ -25,7 +25,7 @@ export function getDictData(dictCode: number, options?: { [key: string]: any }) 
 
 // 新增字典数据
 export async function addDictData(params: API.System.DictData, options?: { [key: string]: any }) {
-  return request<API.Result>('/api/system/dict/data', {
+  return request<API.Result>('/system/dict/data', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=UTF-8',
@@ -37,7 +37,7 @@ export async function addDictData(params: API.System.DictData, options?: { [key:
 
 // 修改字典数据
 export async function updateDictData(params: API.System.DictData, options?: { [key: string]: any }) {
-  return request<API.Result>('/api/system/dict/data', {
+  return request<API.Result>('/system/dict/data', {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json;charset=UTF-8',
@@ -49,7 +49,7 @@ export async function updateDictData(params: API.System.DictData, options?: { [k
 
 // 删除字典数据
 export async function removeDictData(ids: string, options?: { [key: string]: any }) {
-  return request<API.Result>(`/api/system/dict/data/${ids}`, {
+  return request<API.Result>(`/system/dict/data/${ids}`, {
     method: 'DELETE',
     ...(options || {}),
   });
@@ -60,7 +60,7 @@ export function exportDictData(
   params?: API.System.DictDataListParams,
   options?: { [key: string]: any },
 ) {
-  return request<API.Result>(`/api/system/dict/data/export`, {
+  return request<API.Result>(`/system/dict/data/export`, {
     method: 'GET',
     params,
     ...(options || {}),

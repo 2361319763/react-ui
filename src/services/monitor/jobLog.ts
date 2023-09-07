@@ -9,7 +9,7 @@ import { request } from '@umijs/max';
 
 // 查询定时任务调度日志列表
 export async function getJobLogList(params?: API.Monitor.JobLogListParams) {
-  return request<API.Monitor.JobLogPageResult>('/api/schedule/job/log/list', {
+  return request<API.Monitor.JobLogPageResult>('/schedule/job/log/list', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json;charset=UTF-8',
@@ -21,21 +21,21 @@ export async function getJobLogList(params?: API.Monitor.JobLogListParams) {
 
 // 删除定时任务调度日志
 export async function removeJobLog(jobLogId: string) {
-  return request<API.Result>(`/api/schedule/job/log/${jobLogId}`, {
+  return request<API.Result>(`/schedule/job/log/${jobLogId}`, {
     method: 'DELETE'
   });
 }
 
 // 清空调度日志
 export function cleanJobLog() {
-  return request('/api/schedule/job/log/clean', {
+  return request('/schedule/job/log/clean', {
     method: 'delete'
   })
 }
 
 // 导出定时任务调度日志
 export function exportJobLog(params?: API.Monitor.JobLogListParams) { 
-  return request<API.Result>(`/api/schedule/job/log/export`, {
+  return request<API.Result>(`/schedule/job/log/export`, {
     method: 'GET',
     params
   });

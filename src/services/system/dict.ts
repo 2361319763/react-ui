@@ -11,7 +11,7 @@ import { HttpResult } from '@/enums/httpEnum';
 
 // 查询字典类型列表
 export async function getDictTypeList(params?: API.DictTypeListParams) {
-  return request(`/api/system/dict/type/list`, {
+  return request(`/system/dict/type/list`, {
     params: {
       ...params,
     },
@@ -24,14 +24,14 @@ export async function getDictTypeList(params?: API.DictTypeListParams) {
 
 // 查询字典类型详细
 export function getDictType(dictId: string) {
-  return request(`/api/system/dict/type/${dictId}`, {
+  return request(`/system/dict/type/${dictId}`, {
     method: 'GET',
   });
 }
 
 // 查询字典数据详细
 export async function getDictValueEnum(dictType: string, isDigital?: boolean): Promise<DictValueEnumObj> {
-  const resp = await request<API.System.DictTypeResult>(`/api/system/dict/data/type/${dictType}`, {
+  const resp = await request<API.System.DictTypeResult>(`/system/dict/data/type/${dictType}`, {
     method: 'GET',
   });
   if(resp.code === HttpResult.SUCCESS) {
@@ -52,7 +52,7 @@ export async function getDictValueEnum(dictType: string, isDigital?: boolean): P
 }
 
 export async function getDictSelectOption(dictType: string, isDigital?: boolean) {
-  const resp = await request<API.System.DictTypeResult>(`/api/system/dict/data/type/${dictType}`, {
+  const resp = await request<API.System.DictTypeResult>(`/system/dict/data/type/${dictType}`, {
     method: 'GET',
   });
   if (resp.code === 200) {
@@ -73,7 +73,7 @@ export async function getDictSelectOption(dictType: string, isDigital?: boolean)
 
 // 新增字典类型
 export async function addDictType(params: API.System.DictType) {
-  return request<API.Result>('/api/system/dict/type', {
+  return request<API.Result>('/system/dict/type', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=UTF-8',
@@ -84,7 +84,7 @@ export async function addDictType(params: API.System.DictType) {
 
 // 修改字典类型
 export async function updateDictType(params: API.System.DictType) {
-  return request<API.Result>('/api/system/dict/type', {
+  return request<API.Result>('/system/dict/type', {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json;charset=UTF-8',
@@ -95,14 +95,14 @@ export async function updateDictType(params: API.System.DictType) {
 
 // 删除字典类型
 export async function removeDictType(ids: string) {
-  return request<API.Result>(`/api/system/dict/type/${ids}`, {
+  return request<API.Result>(`/system/dict/type/${ids}`, {
     method: 'DELETE'
   });
 }
 
 // 导出字典类型
 export function exportDictType(params?: API.System.DictTypeListParams) {
-  return request<API.Result>('/api/system/dict/type/export', {
+  return request<API.Result>('/system/dict/type/export', {
     method: 'GET',
     params
   });
@@ -110,7 +110,7 @@ export function exportDictType(params?: API.System.DictTypeListParams) {
 
 // 获取字典选择框列表
 export async function getDictTypeOptionSelect(params?: API.DictTypeListParams) {
-  return request('/api/system/dict/type/optionselect', {
+  return request('/system/dict/type/optionselect', {
     params: {
       ...params,
     },

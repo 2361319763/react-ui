@@ -59,5 +59,5 @@ export async function downLoadXlsx(url: string, params: any, fileName: string) {
 
 
 export function download(fileName: string) {
-  window.location.href = `/api/common/download?fileName=${encodeURI(fileName)}&delete=${true}`;
+  window.location.href = `/common/download?fileName=${encodeURI(fileName)}&delete=${true}`;
 }
