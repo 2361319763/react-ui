@@ -3,7 +3,7 @@ import { Button, message, Modal } from 'antd';
 import React, { useRef, useEffect } from 'react';
 import { useIntl, FormattedMessage, useAccess } from '@umijs/max';
 import { getOnlineUserList, forceLogout } from '@/services/monitor/online';
-import { ActionType, ProColumns, ProTable } from '@ant-design/pro-components';
+import { ActionType, ProColumns, ProTable, PageContainer } from '@ant-design/pro-components';
 import { DeleteOutlined } from '@ant-design/icons';
  
 
@@ -130,7 +130,7 @@ const OnlineUserTableList: React.FC = () => {
   ];
 
   return (
-      <div style={{ width: '100%', float: 'right' }}>
+      <PageContainer>
         <ProTable<API.Monitor.OnlineUserType>
           headerTitle={intl.formatMessage({
             id: 'pages.searchTable.title',
@@ -155,7 +155,7 @@ const OnlineUserTableList: React.FC = () => {
           }
           columns={columns}
         />
-      </div>
+      </PageContainer>
   );
 };
 
