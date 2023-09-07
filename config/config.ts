@@ -14,7 +14,12 @@ export default defineConfig({
    * @doc https://umijs.org/docs/api/config#hash
    */
   hash: true,
-
+  /**
+   * @name 关闭 mock 模式
+   * @description Umi 默认开启 Mock 功能，如果不需要的话可以从配置文件关闭
+   * @doc https://umijs.org/docs/guides/mock
+   */
+  mock: false,
   /**
    * @name 兼容性设置
    * @description 设置 ie11 不一定完美兼容，需要检查自己使用的所有依赖
@@ -39,7 +44,7 @@ export default defineConfig({
   theme: {
     // 如果不想要 configProvide 动态设置主题需要把这个设置为 default
     // 只有设置为 variable， 才能使用 configProvide 动态设置主色调
-    'root-entry-name': 'variable',
+    // 'root-entry-name': 'variable',
   },
   /**
    * @name moment 的国际化配置
@@ -97,7 +102,6 @@ export default defineConfig({
    * @doc https://umijs.org/docs/max/i18n
    */
   locale: {
-    // default zh-CN
     default: 'zh-CN',
     antd: true,
     // default true, when it is true, will use `navigator.language` overwrite default
