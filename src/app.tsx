@@ -1,6 +1,5 @@
 import Footer from '@/components/Footer';
 import RightContent from '@/components/RightContent';
-import { LinkOutlined } from '@ant-design/icons';
 import type { Settings as LayoutSettings } from '@ant-design/pro-components';
 import { SettingDrawer } from '@ant-design/pro-components';
 import type { RunTimeLayoutConfig } from '@umijs/max';
@@ -10,6 +9,7 @@ import { errorConfig } from './requestErrorConfig';
 import { clearSessionToken, getAccessToken, getRefreshToken, getTokenExpireTime } from './access';
 import { getRemoteMenu, getRoutersInfo, getUserInfo, patchRouteWithRemoteMenus, setRemoteMenu } from './services/session';
 import { PageEnum } from './enums/pagesEnums';
+import '@/style/index.less'
 
 
 const isDev = process.env.NODE_ENV === 'development';

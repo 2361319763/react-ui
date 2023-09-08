@@ -13,12 +13,17 @@
 export default [
   {
     path: '/',
-    redirect: '/account/center',
+    redirect: '/home',
   },
   {
     path: '*',
     layout: false,
     component: './404',
+  },
+  {
+    name: 'home',
+    path: '/home',
+    component: './Welcome',
   },
   {
     path: '/user',

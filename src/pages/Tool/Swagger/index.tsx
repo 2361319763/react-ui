@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { PageContainer } from '@ant-design/pro-components';
 
 /**
  *
@@ -12,7 +13,7 @@ const CacheInfo: React.FC = () => {
     if (frame) {
       const deviceWidth = document.documentElement.clientWidth;
       const deviceHeight = document.documentElement.clientHeight;
-      frame.style.width = `${Number(deviceWidth) - 260}px`;
+      frame.style.width = `${Number(deviceWidth) - 320}px`;
       frame.style.height = `${Number(deviceHeight) - 120}px`;
     }
   });
@@ -21,7 +22,7 @@ const CacheInfo: React.FC = () => {
     <div style={{}}>
       <iframe
         style={{ width: '100%', border: '0px', height: '100%' }}
-        src={`/api/swagger-ui/index.html`}
+        src={`/dev-api/swagger-ui/index.html`}
         id="bdIframe"
       />
     </div>

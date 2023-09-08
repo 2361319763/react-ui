@@ -15,6 +15,10 @@ declare namespace API.Monitor {
     remark: string;
   };
 
+  export type CacheKey = {
+    cacheKey: string;
+  };
+
   export type CacheNamesResponse = {
     data: CacheContent[];
     code: number;

@@ -44,6 +44,7 @@ declare namespace API.Monitor {
     usage: string;
     used: string;
     version: string;
+    inputArgs: string;
   };
 
   export type DiskInfoType = {
