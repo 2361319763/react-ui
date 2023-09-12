@@ -118,7 +118,7 @@ export function convertCompatRouters(childrens: API.RoutersMenuItem[]): any[] {
 
 export async function getRoutersInfo(): Promise<MenuDataItem[]> {
   return getRouters().then((res) => {
-    if (res.code === 200) {
+    if (res?.code === 200) {
       return convertCompatRouters(res.data);
     } else {
       return [];

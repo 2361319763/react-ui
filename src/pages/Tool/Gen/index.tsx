@@ -20,9 +20,8 @@ import {
   ProDescriptions,
   ProDescriptionsItemProps,
   ProTable,
+  PageContainer
 } from '@ant-design/pro-components';
-
-const { Content } = Layout;
 
 /**
  * 删除节点
@@ -226,7 +225,7 @@ const GenCodeView: React.FC = () => {
   ];
 
   return (
-    <Content>
+    <PageContainer>
       <Card bordered={false}>
         <ProTable<GenCodeType>
           headerTitle="代码生成信息"
@@ -353,7 +352,7 @@ const GenCodeView: React.FC = () => {
           )}
         </Drawer>
       </Card>
-    </Content>
+    </PageContainer>
   );
 };
 

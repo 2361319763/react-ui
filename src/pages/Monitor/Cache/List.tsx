@@ -74,7 +74,7 @@ const CacheList: React.FC = () => {
 
   const getListCache = () => {
     listCacheName().then((res) => {
-      setCacheContentList(res.data);
+      setCacheContentList(res?.data || []);
     });
   };
   const getCacheKey = (key:string = '') => {
@@ -92,7 +92,7 @@ const CacheList: React.FC = () => {
   const getCacheInfo = (cacheKey:string = '') => {
     setCacheKey(cacheKey);
     getCacheValue(cacheName || '',cacheKey).then(res=>{
-      form.setFieldsValue(res.data);
+      form.setFieldsValue(res?.data);
     })
   }
   const clearAllCache = () => {

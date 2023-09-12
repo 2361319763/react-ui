@@ -16,6 +16,7 @@ import Settings from '../../../../config/defaultSettings';
 import React, { useEffect, useState } from 'react';
 import { flushSync } from 'react-dom';
 import { clearSessionToken, setSessionToken } from '@/access';
+import { getRoutersInfo, setRemoteMenu } from '@/services/session';
 
 const Lang = () => {
   const langClassName = useEmotionCss(({ token }) => {
@@ -108,6 +109,9 @@ const Login: React.FC = () => {
         message.success(defaultLoginSuccessMessage);
         await fetchUserInfo();
         console.log('login ok');
+        getRoutersInfo().then(res => {
+          setRemoteMenu(res);
+        });
         const urlParams = new URL(window.location.href).searchParams;
         history.push(urlParams.get('redirect') || '/');
         return;
@@ -170,7 +174,7 @@ const Login: React.FC = () => {
             <LoginMessage
               content={intl.formatMessage({
                 id: 'pages.login.accountLogin.errorMessage',
-                defaultMessage: '账户或密码错误(admin/admin123)',
+                defaultMessage: '账户或密码错误',
               })}
             />
           )}

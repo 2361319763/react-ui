@@ -2,6 +2,7 @@ import Footer from '@/components/Footer';
 import RightContent from '@/components/RightContent';
 import type { Settings as LayoutSettings } from '@ant-design/pro-components';
 import { SettingDrawer } from '@ant-design/pro-components';
+import { message, notification } from 'antd';
 import type { RunTimeLayoutConfig } from '@umijs/max';
 import { history, Link } from '@umijs/max';
 import defaultSettings from '../config/defaultSettings';
@@ -9,6 +10,7 @@ import { errorConfig } from './requestErrorConfig';
 import { clearSessionToken, getAccessToken, getRefreshToken, getTokenExpireTime } from './access';
 import { getRemoteMenu, getRoutersInfo, getUserInfo, patchRouteWithRemoteMenus, setRemoteMenu } from './services/session';
 import { PageEnum } from './enums/pagesEnums';
+import errorCode from '@/utils/errorCode'
 import '@/style/index.less'
 
 
@@ -186,6 +188,7 @@ const checkRegion = 5 * 60 * 1000;
 
 export const request = {
   ...errorConfig,
+  // 请求拦截器
   requestInterceptors: [
     (url: any, options: { headers: any }) => {
       const baseApi = '/dev-api';
@@ -220,15 +223,26 @@ export const request = {
       };
     },
   ],
+  // 响应拦截器
   responseInterceptors: [
-    // (response) =>
-    // {
-    //   // // 不再需要异步处理读取返回体内容，可直接在data中读出，部分字段可在 config 中找到
-    //   // const { data = {} as any, config } = response;
-    //   // // do something
-    //   // console.log('data: ', data)
-    //   // console.log('config: ', config)
-    //   return response
-    // },
+    (response:any) =>
+    {
+      // 未设置状态码则默认成功状态
+      const code:number = response.data.code || 200;
+      const msg:string = errorCode[code] || response.data.msg || errorCode['default'];
+      if (response.request.responseType ===  'blob' || response.request.responseType ===  'arraybuffer') {
+        return response.data
+      }
+      if (code === 401) {
+        return '无效的会话，或者会话已过期，请重新登录。'
+      } else if (code === 500) {
+        message.error(msg);
+      } else if (code === 601) {
+        message.warning(msg);
+      } else if (code !== 200) {
+        notification.open({ description: msg, message: '系统错误', type: 'error' });
+      }
+      return response
+    },
   ],
 };
