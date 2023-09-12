@@ -1,12 +1,5 @@
 import { request } from '@umijs/max'; 
 
-/**
- * 定时任务调度 API
- * 
- * @author whiteshader@163.com
- * @date 2023-02-07
- */
-
 // 查询定时任务调度列表
 export async function getJobList(params?: API.Monitor.JobListParams) {
   return request<API.Monitor.JobPageResult>('/monitor/job/list', {

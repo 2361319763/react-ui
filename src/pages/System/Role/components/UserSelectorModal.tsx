@@ -3,15 +3,7 @@ import { Modal } from 'antd';
 import { FormattedMessage, useIntl } from '@umijs/max';
 import { ActionType, ParamsType, ProColumns, ProTable, RequestData } from '@ant-design/pro-components';
 import { getDictValueEnum } from '@/services/system/dict';
-import DictTag from '@/components/DictTag';
-
-
-/* *
- *
- * @author whiteshader@163.com
- * @datetime  2023/02/10
- * 
- * */
+import DictTag from '@/components/DictTag'; 
 
 export type DataScopeFormProps = {
   onCancel: () => void;

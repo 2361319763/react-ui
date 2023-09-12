@@ -1,12 +1,3 @@
-
-/* *
- *
- * @author whiteshader@163.com
- * @datetime  2023/02/07
- * 
- * */
-
-
 declare namespace API.Monitor {
 
   export type CpuInfoType = {

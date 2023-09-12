@@ -1,50 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { PageContainer, ProForm, ProFormText } from '@ant-design/pro-components';
+import { PageContainer, ProForm, ProFormText, ProFormTextArea } from '@ant-design/pro-components';
 import { Col, Row, Card, Table, Button, Form } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { HddOutlined, RedoOutlined, DeleteOutlined, KeyOutlined, FileOutlined } from '@ant-design/icons';
-import { listCacheName, listCacheKey, getCacheValue } from '@/services/monitor/cachelist';
+import { listCacheName, listCacheKey, getCacheValue, clearCacheAll, clearCacheKey, clearCacheName } from '@/services/monitor/cachelist';
 
 const spanStyle = {
   marginLeft: 5,
 };
 const size = 'middle';
 
-const cacheItem: ColumnsType<API.Monitor.CacheContent> = [
-  {
-    title: '缓存名称',
-    align: 'center',
-    dataIndex: 'cacheName',
-  },
-  {
-    title: '备注',
-    align: 'center',
-    dataIndex: 'remark',
-  },
-  {
-    title: '操作',
-    key: 'action',
-    align: 'center',
-    render: (_, record) => {
-      return <Button type="link" icon={<DeleteOutlined />} />;
-    },
-  },
-];
-const keyItem: ColumnsType<API.Monitor.CacheKey> = [
-  {
-    title: '缓存键名',
-    align: 'center',
-    dataIndex: 'cacheKey',
-  },
-  {
-    title: '操作',
-    key: 'action',
-    align: 'center',
-    render: (_, record) => {
-      return <Button type="link" icon={<DeleteOutlined />} />;
-    },
-  },
-];
 
 const CacheList: React.FC = () => {
   let [cacheContentList, setCacheContentList] = useState<API.Monitor.CacheContent[]>();
@@ -52,6 +17,60 @@ const CacheList: React.FC = () => {
   let [cacheKey, setCacheKey] = useState<string>();
   let [cacheKeyList, setCacheKeyList] = useState<API.Monitor.CacheKey[]>();
   const [form] = Form.useForm();
+
+  const cacheItem: ColumnsType<API.Monitor.CacheContent> = [
+    {
+      title: '缓存名称',
+      align: 'center',
+      dataIndex: 'cacheName',
+    },
+    {
+      title: '备注',
+      align: 'center',
+      dataIndex: 'remark',
+    },
+    {
+      title: '操作',
+      key: 'action',
+      align: 'center',
+      render: (_, record) => {
+        return (
+          <Button 
+            type="link" 
+            icon={<DeleteOutlined />} 
+            onClick={
+              () => {
+                clearName(record.cacheName)
+              }
+            }
+          />);
+      },
+    },
+  ];
+
+  const keyItem: ColumnsType<API.Monitor.CacheKey> = [
+    {
+      title: '缓存键名',
+      align: 'center',
+      dataIndex: 'cacheKey',
+    },
+    {
+      title: '操作',
+      key: 'action',
+      align: 'center',
+      render: (_, record) => {
+        return (
+          <Button 
+            type="link" 
+            icon={<DeleteOutlined />} 
+            onClick={() => {
+              clearCache(record.cacheKey)
+            }}
+          />
+        );
+      },
+    },
+  ];
 
   const getListCache = () => {
     listCacheName().then((res) => {
@@ -62,7 +81,7 @@ const CacheList: React.FC = () => {
     setCacheName(key);
     form.resetFields();
     listCacheKey(key).then(res=> {
-      const data = res.data.map(J=>{
+      const data = res.data && res.data.map(J=>{
         return {
           cacheKey: J
         }
@@ -72,8 +91,25 @@ const CacheList: React.FC = () => {
   }
   const getCacheInfo = (cacheKey:string = '') => {
     setCacheKey(cacheKey);
-    getCacheValue(cacheKey,cacheKey).then(res=>{
+    getCacheValue(cacheName || '',cacheKey).then(res=>{
       form.setFieldsValue(res.data);
+    })
+  }
+  const clearAllCache = () => {
+    clearCacheAll()
+  }
+  const clearCache = (key:string) => {
+    clearCacheKey(key).then(res=>{
+      getCacheKey(cacheName);
+    })
+  }
+  const clearName = (name:string) => {
+    clearCacheName(name).then(res=>{
+      getListCache();
+      if (cacheName==name) {
+        form.resetFields();
+        setCacheKeyList([])
+      }
     })
   }
   useEffect(() => {
@@ -89,7 +125,7 @@ const CacheList: React.FC = () => {
             title={
               <div>
                 <HddOutlined />
-                <span style={spanStyle}>内存</span>
+                <span style={spanStyle}>缓存列表</span>
               </div>
             }
             extra={
@@ -97,11 +133,11 @@ const CacheList: React.FC = () => {
                 icon={
                   <RedoOutlined
                     style={{ color: '#1890ff' }}
-                    onClick={() => {
-                      getListCache();
-                    }}
                   />
                 }
+                onClick={() => {
+                  getListCache();
+                }}
                 type="link"
               />
             }
@@ -176,7 +212,7 @@ const CacheList: React.FC = () => {
                   />
                 }
                 onClick={() => {
-                  getCacheInfo(cacheKey)
+                  clearAllCache()
                 }}
                 type="link"
               >
@@ -187,6 +223,8 @@ const CacheList: React.FC = () => {
             <ProForm
               grid={true}
               form={form}
+              readonly={true}
+              submitter={false}
               autoComplete="off"
             >
               <ProFormText 
@@ -201,7 +239,7 @@ const CacheList: React.FC = () => {
                 disabled
                 label="缓存键名"
               />
-              <ProFormText 
+              <ProFormTextArea 
                 name="cacheValue"
                 placeholder=""
                 disabled

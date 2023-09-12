@@ -18,13 +18,6 @@ import AuthRoleForm from './components/AuthRole';
 
 const { confirm } = Modal;
 
-/* *
- *
- * @author whiteshader@163.com
- * @datetime  2023/02/06
- * 
- * */
-
 /**
  * 添加节点
  *

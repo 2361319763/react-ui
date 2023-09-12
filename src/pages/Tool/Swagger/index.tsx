@@ -1,12 +1,6 @@
 import React, { useEffect } from 'react';
 import { PageContainer } from '@ant-design/pro-components';
 
-/**
- *
- * @author whiteshader@163.com
- *
- * */
-
 const CacheInfo: React.FC = () => {
   useEffect(() => {
     const frame = document.getElementById('bdIframe');

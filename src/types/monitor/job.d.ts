@@ -1,10 +1,3 @@
-/**
- * 定时任务调度 Model Declare
- * 
- * @author whiteshader@163.com
- * @date 2023-02-07
- */
-
 declare namespace API.Monitor {
 
   export interface Job {

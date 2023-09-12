@@ -1,9 +1,4 @@
 import React, { useEffect } from 'react';
-/**
- *
- * @author whiteshader@163.com
- *
- * */
 
 const Druid: React.FC = () => {
   useEffect(() => {
